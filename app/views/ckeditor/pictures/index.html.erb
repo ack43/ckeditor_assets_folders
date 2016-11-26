@@ -1,0 +1,42 @@
+<%- if @folder %>
+  <%- _params = params.merge(folder: @folder.parent_id.to_s).clone %>
+  <span><%= link_to "<- назад", ckeditor.pictures_path(_params) %></span>
+  <h2><%= @folder.full_name %></h2>
+<%- end %>
+<div id="fileupload" class="gal-holder">
+  <div class="folder-item gal-item">
+    <div class="add-folder-button gal-upload-holder">
+      <%= text_field 'folder', 'name', value: '', style: 'height: 20px' %>
+      <br>
+      <%- _title = I18n.t(:add_folder, scope: [:ckeditor, :buttons]) %>
+      <%- _url = ckeditor.folders_path(params.merge(folder: {parent_id: (@folder and @folder.id.to_s)})) %>
+      <%- _onclick = '$.post(this.href + "&" + $(this).siblings("input").serialize(), function(data){$(".folders-list").append(data)}); return false;' %>
+      <%= link_to _title, _url, class: "add", onclick: _onclick %>
+    </div>
+  </div>
+
+  <div class="folders-list" data-endless="true">
+    <%= render partial: 'ckeditor/shared/folder', collection: @folders %>
+  </div>
+
+  <div class="gal-item">
+    <div class="fileupload-button gal-upload-holder">
+      <%= link_to I18n.t(:upload, scope: [:ckeditor, :buttons]), 'javascript:void(0)', class: "add" %>
+    </div>
+  </div>
+
+  <div class="fileupload-list" data-endless="true">
+    <%= render partial: 'ckeditor/shared/asset', collection: @pictures.scoped %>
+  </div>
+
+  <% unless @pictures.last_page? %>
+    <div class="pagination">
+      <%= link_to I18n.t("ckeditor.buttons.next"), ckeditor.pictures_path(params.merge(page: @pictures.next_page)), class: "next", rel: "next" %>
+    </div>
+  <% end -%>
+
+  <script type="text/javascript">
+    <%- opts = {formData: {folder_id: (@folder and @folder.id.to_s) } } %>
+    <%= Ckeditor::Utils.js_fileuploader('image', opts) %>
+  </script>
+</div>

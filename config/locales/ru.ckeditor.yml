@@ -1,0 +1,5 @@
+ru:
+  ckeditor:
+    buttons:
+      add_folder: 'Добавить папку'
+    confirm_delete_folder: "Удалить папку??"

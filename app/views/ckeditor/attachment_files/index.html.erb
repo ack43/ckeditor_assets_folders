@@ -1,0 +1,28 @@
+<%- if @folder %>
+  <%- _params = params.merge(folder: @folder.parent_id.to_s).clone %>
+  <!-- <span><%= link_to "<- назад", ckeditor.pictures_path(_params) %></span> -->
+  <h2><%= @folder.full_path_array(_params).map { |p| link_to p[0], ckeditor.pictures_path(p[1]), title: p[0] }.join("/").html_safe %></h2>
+<%- end %>
+
+<div id="fileupload" class="gal-holder">
+  <div class="gal-item">
+    <div class="fileupload-button gal-upload-holder">
+      <%= link_to I18n.t(:upload, scope: [:ckeditor, :buttons]), 'javascript:void(0)', class: "add" %>
+    </div>
+  </div>
+
+  <div class="fileupload-list">
+    <%= render partial: 'ckeditor/shared/asset', collection: @attachments %>
+  </div>
+
+  <% unless @attachments.last_page? %>
+    <div class="pagination">
+      <%= link_to I18n.t("ckeditor.buttons.next"), ckeditor.attachment_files_path(params.merge(page: @attachments.next_page)), class: "next", rel: "next" %>
+    </div>
+  <% end -%>
+
+  <script type="text/javascript">
+    <%- opts = {formData: {folder_id: (@folder and @folder.id.to_s) } } %>
+    <%= Ckeditor::Utils.js_fileuploader('attachments', opts) %>
+  </script>
+</div>

@@ -21,6 +21,14 @@ class Ckeditor::Folder
     end
   end
 
+  def full_path_array(_params)
+    if _p = self.parent
+      return [_p.full_path_array(_params).flatten, [self.name, _params.merge(folder: self.id.to_s)]]
+    else
+      return [['Главная', _params.merge(folder: nil)], [self.name, _params.merge(folder: self.id.to_s)]]
+    end
+  end
+
 
   def pictures
     self.assets.where(_type: 'Ckeditor::Picture')

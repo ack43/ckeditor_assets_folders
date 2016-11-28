@@ -1,7 +1,9 @@
 <%- if @folder %>
   <%- _params = params.merge(folder: @folder.parent_id.to_s).clone %>
   <!-- <span><%= link_to "<- назад", ckeditor.pictures_path(_params) %></span> -->
-  <h2><%= @folder.full_path_array(_params).map { |p| link_to p[0], ckeditor.pictures_path(p[1]), title: p[0] }.join("/").html_safe %></h2>
+  <h2><%= @folder.full_path_array(_params).flatten.map { |p| link_to p[:name], ckeditor.pictures_path(p[:params]), title: p[:name] }.join("/").html_safe %></h2>
+<%- else %>
+  <h2><%= link_to 'Главная', params, title: 'Главная' %></h2>
 <%- end %>
 
 <div id="fileupload" class="gal-holder">

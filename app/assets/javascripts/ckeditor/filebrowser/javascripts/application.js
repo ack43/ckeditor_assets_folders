@@ -229,10 +229,7 @@ qq.extend(qq.FileUploaderInput.prototype, {
     }
 });
 
-alert(1);
-
 
 $(document).delegate('.delete-folder', 'ajax:complete', function(xhr, status){
-  alert(2);
   document.location.reload();
 });

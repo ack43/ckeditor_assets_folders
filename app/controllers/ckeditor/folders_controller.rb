@@ -2,7 +2,7 @@ class Ckeditor::FoldersController < ::ApplicationController
 
   def index
     @folder = Ckeditor::Folder.where(id: params[:folder]).first
-    @folders = @folder ? @folder.children.sorted : Ckeditor::Folder.roots
+    @folders = @folder ? @folder.children.sorted : Ckeditor::Folder.roots.sorted
   end
 
   def show

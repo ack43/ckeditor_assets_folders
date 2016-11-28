@@ -9,7 +9,7 @@ class Ckeditor::AttachmentFilesController < Ckeditor::ApplicationController
       @attachments = Ckeditor.attachment_file_adapter.find_all(ckeditor_attachment_files_scope).where(folder_id: @folder.id)
       @folders = @folder.children.sorted unless params[:page]
     else
-      @folders = Ckeditor::Folder.roots
+      @folders = Ckeditor::Folder.roots.sorted
       @attachments = Ckeditor.attachment_file_adapter.find_all(ckeditor_attachment_files_scope).where(folder_id: nil)
     end
 

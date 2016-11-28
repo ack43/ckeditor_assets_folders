@@ -1,1 +1,1 @@
-= render partial: 'ckeditor/shared/folder', locals: {folder: @folder}
+= render partial: 'ckeditor/shared/folder', locals: {folder: @folder, path_method: (!@referer_part.blank? ? "#{@referer_part}_path" : nil)}

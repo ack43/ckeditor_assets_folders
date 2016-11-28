@@ -4,7 +4,7 @@
   <!-- <%= @folder.full_path_array(_params) %> -->
   <h2><%= @folder.full_path_array(_params).flatten.map { |p| link_to p[:name], ckeditor.pictures_path(p[:params]), title: p[:name] }.join("/").html_safe %></h2>
 <%- else %>
-  <h2><%= link_to 'Главная', params, title: 'Главная' %></h2>
+  <h2><%= link_to 'Главная', ckeditor.pictures_path(params), title: 'Главная' %></h2>
 <%- end %>
 
 <div id="fileupload" class="gal-holder">
@@ -20,8 +20,9 @@
   </div>
 
   <div class="folders-list" data-endless="true">
-    <%= render partial: 'ckeditor/shared/folder', collection: @folders %>
+    <%= render partial: 'ckeditor/shared/folder', collection: @folders, locals: {path_method: :pictures_path} %>
   </div>
+
 
   <div class="gal-item">
     <div class="fileupload-button gal-upload-holder">

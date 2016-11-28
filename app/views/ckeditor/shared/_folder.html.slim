@@ -5,11 +5,12 @@
   - _attrs[:title]  = I18n.t('ckeditor.buttons.delete')
   - _attrs[:data]   = { confirm: t('ckeditor.confirm_delete_folder') }
   - _attrs[:class]  = "delete-folder gal-del"
+  = link_to '', ckeditor.folder_path(folder, format: :json), _attrs
   .folder.gal-inner-holder
-    = link_to 'X', ckeditor.folder_path(folder, format: :json), _attrs
     .folder-data
       .folder-name
         / - _onclick = "document.location = '#{}'; return false;"
         / = link_to folder.name, 'javascript:void(0)', onclick: _onclick 
         / - _onclick = "document.location = '#{ckeditor.pictures_path(params.merge(folder: folder.id.to_s))}'; return false;"
-        = link_to folder.name, ckeditor.pictures_path(params.merge(folder: folder.id.to_s))
+        
+        = link_to folder.name, ckeditor.send(path_method, params.merge(folder: folder.id.to_s))

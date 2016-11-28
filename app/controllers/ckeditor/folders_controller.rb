@@ -10,8 +10,10 @@ class Ckeditor::FoldersController < ::ApplicationController
   end
 
   def create
-    puts params_folder.inspect
-
+    @referer_part = request.referer.match(/\/ckeditor\/(attachment_files|pictures)\?/)
+    puts request.referer.inspect
+    puts @referer_part.inspect
+    @referer_part = @referer_part[1] if @referer_part
     @folder = Ckeditor::Folder.create(params_folder)
     render layout: false
   end
@@ -26,7 +28,7 @@ class Ckeditor::FoldersController < ::ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to pictures_path }
+      format.html { redirect_to folders_path }
       format.json { render json: @folder, status: 204 }
     end
   end

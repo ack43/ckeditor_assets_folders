@@ -2,11 +2,12 @@ body
   padding: 0
   margin: 0
   font-family: Arial, Helvetica, sans-serif
-  background: black
-  color: red
 
 img
   border: 0
+
+#folder_name
+  width: 115px
 
 .gal-holder
   display: block
@@ -25,18 +26,20 @@ img
     position: absolute
     right: 0
     top: 0
-    background: url(image_path("ckeditor/filebrowser/gal_del.png")) no-repeat left center
+    background: transparent image_url("ckeditor/filebrowser/gal_del.png") no-repeat left center
+    // background: url(image_path("ckeditor/filebrowser/gal_del.png")) no-repeat left center
+    // background: url(asset_path("ckeditor/filebrowser/gal_del.png")) no-repeat left center
     width: 17px
     height: 17px
   .gal-item .preloader, .folder-item .preloader
-    background: url(image_path("ckeditor/filebrowser/preloader.gif")) no-repeat center center
+    background: transparent image_url("ckeditor/filebrowser/preloader.gif") no-repeat center center
+    // background: url(image_path("ckeditor/filebrowser/preloader.gif")) no-repeat center center
+    // background: url(asset_path("ckeditor/filebrowser/preloader.gif")) no-repeat center center
     width: 118px
     height: 100px
   .gal-item .gal-del:hover, .folder-item .gal-del:hover
-    -moz-opacity: 0.7
-    -khtml-opacity: 0.7
     opacity: 0.7
-  .gal-item
+  .gal-item, .folder-item
     .gal-upload-holder
       input
         height: 162px
@@ -50,7 +53,7 @@ img
       background: #fff
       border: solid 1px #D3D3D3
       min-height: 138px
-  .folder-item .gal-upload-holder
+  .gal-item .gal-upload-holder, .folder-item .gal-upload-holder
     display: block
     margin: 6px 6px 0 0
     overflow: hidden
@@ -58,18 +61,20 @@ img
     background: #fff
     border: solid 1px #D3D3D3
     min-height: 138px
-  .gal-item
+  .folder-item, .gal-item
+    cursor: pointer
     .gal-inner-holder
-      &.hover
+      &.hover, &:hover
         background: #DFF1FF
         border: solid 1px #99CCFF
-      &.selected
+      &.selected, &:active
         background: #B4D9FF
         border: solid 1px #6565FE
     .gal-upload-holder .add
       display: block
       color: #2e5aff
-      background: url(image_path("ckeditor/filebrowser/gal_add.png")) no-repeat left center
+      background: transparent url(image_path("ckeditor/filebrowser/gal_add.png")) no-repeat left center
+      // background: url(image_path("ckeditor/filebrowser/gal_add.png")) no-repeat left center
       padding-left: 33px
       line-height: 25px
       text-decoration: none
@@ -91,6 +96,9 @@ img
           font-size: 12px
           overflow: hidden
           width: 500px
+  .folder-item
+    .gal-upload-holder .add
+      padding-left: 0px
 
 .img-name
   word-wrap: break-word
@@ -116,7 +124,8 @@ img
   text-align: center
   a
     color: #2e5aff
-    background: url(image_path("ckeditor/filebrowser/gal_more.gif")) no-repeat left center
+    background: transparent image_url("ckeditor/filebrowser/gal_more.gif") no-repeat left center
+    // background: url(image_path("ckeditor/filebrowser/gal_more.gif")) no-repeat left center
     padding-left: 15px
     font-size: 14px
     text-decoration: none

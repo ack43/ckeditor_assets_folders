@@ -233,3 +233,11 @@ qq.extend(qq.FileUploaderInput.prototype, {
 $(document).delegate('.delete-folder', 'ajax:complete', function(xhr, status){
   document.location.reload();
 });
+
+$(document).delegate('.folder-item .gal-inner-holder', 'click', function(e){
+  if($(e.currentTarget).find('a.add').length == 0) {
+    e.stopImmediatePropagation();
+    document.location = $(e.currentTarget).find('a').attr('href');
+    return false;
+  }
+});

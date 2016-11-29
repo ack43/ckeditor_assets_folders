@@ -11,11 +11,31 @@ class Ckeditor::FoldersController < ::ApplicationController
 
   def create
     @referer_part = request.referer.match(/\/ckeditor\/(attachment_files|pictures)\?/)
-    puts request.referer.inspect
-    puts @referer_part.inspect
     @referer_part = @referer_part[1] if @referer_part
     @folder = Ckeditor::Folder.create(params_folder)
     render layout: false
+  end
+
+  def insert_into
+    @folder = params[:folder].blank? ? nil : Ckeditor::Folder.where(id: params[:folder]).first
+    @new_child = Ckeditor::Folder.where(id: params[:id]).first
+    @new_child.parent = @folder
+    if @new_child.save
+      render layout: false
+    else
+      render layout: false, code: 422
+    end
+  end
+
+  def insert_asset
+    @folder = params[:folder].blank? ? nil : Ckeditor::Folder.where(id: params[:folder]).first
+    @asset = Ckeditor::Asset.where(id: params[:asset]).first
+    @asset.folder = @folder
+    if Ckeditor::Asset.where(id: @asset.id).update_all(folder_id: (@folder ? @folder.id : nil))
+      render layout: false
+    else
+      render layout: false, code: 422
+    end
   end
 
   def destroy

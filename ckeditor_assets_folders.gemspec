@@ -33,4 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ckeditor', '~> 4.2'
   spec.add_dependency 'mongoid'
 
+  spec.add_dependency 'jquery-dragdrop-rails'
+
 end

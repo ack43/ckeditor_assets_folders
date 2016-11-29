@@ -15,7 +15,9 @@
     - _name = "<<-- #{_name}" if is_go_back
     
   .folder.gal-inner-holder
-    .folder-data
+    - _data_insert_into_url   = ckeditor.insert_into_folder_path(id: (folder ? folder.id : ""))
+    - _data_insert_asset_url  = ckeditor.insert_asset_folders_path(folder: (folder ? folder.id : ""))
+    .folder-data(data-insert-into-url=_data_insert_into_url data-insert-asset-url=_data_insert_asset_url)
       .folder-name
         - if folder
           = link_to _name, ckeditor.send(path_method, params.merge(folder: folder.id.to_s))

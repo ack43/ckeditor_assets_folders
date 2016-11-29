@@ -8,6 +8,12 @@
 <%- end %>
 
 <div id="fileupload" class="gal-holder">
+  <%- if @folder and @folder.parent %>
+    <%= render partial: 'ckeditor/shared/folder', locals: {folder: @folder.parent, path_method: :pictures_path, is_go_back: true} %>
+  <%- elsif !@folder.nil? %>
+    <%= render partial: 'ckeditor/shared/folder', locals: {folder: nil, path_method: :pictures_path, is_go_back: true} %>
+  <%- end %>
+
   <div class="folder-item gal-item">
     <div class="add-folder-button gal-upload-holder">
       <%= text_field 'folder', 'name', value: '', style: 'height: 20px' %>

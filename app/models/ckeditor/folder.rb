@@ -21,6 +21,26 @@ class Ckeditor::Folder
     Ckeditor::Folder.any_of({parent_id: self.id})
   end
 
+  def pictures_count
+    self.pictures.count
+  end
+  def all_pictures_count
+    self_and_descendants.sum(&:pictures_count)
+  end
+  def attachment_files_count
+    self.attachment_files.count
+  end
+  def all_attachment_files_count
+    self_and_descendants.sum(&:attachment_files_count)
+  end
+
+  def assets_count
+    self.assets.count
+  end
+  def all_assets_count
+    self_and_descendants.sum(&:assets_count)
+  end
+
 
   # acts_as_nested_set
   # scope :sorted, -> { asc(:lft) }

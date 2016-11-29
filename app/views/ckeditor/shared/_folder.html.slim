@@ -1,16 +1,32 @@
-= content_tag(:div, id: dom_id(folder), class: "folder-item") do
+- is_go_back ||= false
+- _id = folder ? dom_id(folder) : 'main_page'
+= content_tag(:div, id: _id, class: "folder-item") do
   - _attrs = {}
   - _attrs[:remote] = true
   - _attrs[:method] = :delete
   - _attrs[:title]  = I18n.t('ckeditor.buttons.delete')
   - _attrs[:data]   = { confirm: t('ckeditor.confirm_delete_folder') }
   - _attrs[:class]  = "delete-folder gal-del"
-  = link_to '', ckeditor.folder_path(folder, format: :json), _attrs
+  - if folder
+    = link_to '', ckeditor.folder_path(folder, format: :json), _attrs
+    - _name = folder.name
+  - else
+    - _name = 'Главная'
+    - _name = "<<-- #{_name}" if is_go_back
+    
   .folder.gal-inner-holder
     .folder-data
       .folder-name
-        / - _onclick = "document.location = '#{}'; return false;"
-        / = link_to folder.name, 'javascript:void(0)', onclick: _onclick 
-        / - _onclick = "document.location = '#{ckeditor.pictures_path(params.merge(folder: folder.id.to_s))}'; return false;"
+        - if folder
+          = link_to _name, ckeditor.send(path_method, params.merge(folder: folder.id.to_s))
+        - else
+          = link_to _name, ckeditor.send(path_method, params.merge(folder: nil))
         
-        = link_to folder.name, ckeditor.send(path_method, params.merge(folder: folder.id.to_s))
+      .folder-assets-count
+        - if folder
+          - _assets_count = folder.send(path_method.to_s.sub(/_path$/, "_count"))
+          - _all_assets_count = folder.send(path_method.to_s.sub(/_path$/, "_count").sub(/^/, "all_"))
+        - else
+          - _assets_count = "Ckeditor::#{path_method.to_s.sub(/_path$/, "").singularize.camelize}".constantize.no_folder.count
+          - _all_assets_count = _assets_count #Ckeditor::Asset.no_folder.count
+        = "Файлов: #{_assets_count}/#{_all_assets_count}"

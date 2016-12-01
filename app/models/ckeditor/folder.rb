@@ -15,7 +15,7 @@ class Ckeditor::Folder
     self.children.all.to_a.each do |c|
       _ret << c.self_and_descendants
     end
-    _ret.flatten
+    _ret.flatten.uniq
   end
   def children
     Ckeditor::Folder.any_of({parent_id: self.id})

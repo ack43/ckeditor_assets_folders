@@ -2,14 +2,14 @@ ready = ->
   $('.fileupload-list .gal-item, .folders-list .folder-item').drag('start', (ev, dd) ->
     dd.proxy = $(this).clone()
                       .css('opacity', .75)
-                      .css('position', 'fixed')
+                      .css('position', 'absolute')
                       .css('z-index', '2000')
                       .prependTo($('#fileupload'))
 
   ).drag((ev, dd) ->
     $(dd.proxy).css
-      top: (dd.offsetY - $('#fileupload').offset().top)
-      left: (dd.offsetX - $('#fileupload').offset().left)
+      top:  dd.offsetY
+      left: dd.offsetX
   ).drag 'end', (ev, dd) ->
     $(dd.proxy).remove()
   $('.folder-item').drop (ev, dd) ->

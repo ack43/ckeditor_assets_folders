@@ -9,7 +9,8 @@ And add uploads in this folders for more flexible user interface.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'ckeditor_assets_folders'
+gem 'jquery-dragdrop-rails', github: 'alippert/jquery-dragdrop-rails' # optional: version without railties v3.0 dependencies
+gem 'ckeditor_assets_folders', github: 'ack43/ckeditor_assets_folders' #temporary
 ```
 
 And then execute:

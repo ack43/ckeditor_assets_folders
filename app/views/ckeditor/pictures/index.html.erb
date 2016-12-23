@@ -20,7 +20,7 @@
       <br>
       <%- _title = I18n.t(:add_folder, scope: [:ckeditor, :buttons]) %>
       <%- _url = ckeditor.folders_path(params.merge(folder: {parent_id: (@folder and @folder.id.to_s)})) %>
-      <%- _onclick = '$.post(this.href + "&" + $(this).siblings("input").serialize(), function(data){$(".folders-list").append(data)}); return false;' %>
+      <%- _onclick = '$.post(this.href + "&" + $(this).siblings("input").serialize(), function(data){$(".folders-list").append(data); set_drag_events($(".folder-item"));}); return false;' %>
       <%= link_to _title, _url, class: "add", onclick: _onclick %>
     </div>
   </div>

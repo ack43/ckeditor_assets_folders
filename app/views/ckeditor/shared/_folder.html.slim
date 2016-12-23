@@ -1,3 +1,4 @@
+- folder ||= @folder if action_name == "create"
 - is_go_back ||= false
 - _id = folder ? dom_id(folder) : 'main_page'
 = content_tag(:div, id: _id, class: "folder-item") do

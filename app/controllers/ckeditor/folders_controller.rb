@@ -42,7 +42,8 @@ class Ckeditor::FoldersController < ::ApplicationController
     @folder = Ckeditor::Folder.where(id: params[:id]).first
     if @folder
       @folder.self_and_descendants.each do |f|
-        Ckeditor::Asset.where(folder_id: f.id).update_all(folder_id: @folder.parent_id)
+        # Ckeditor::Asset.where(folder_id: f.id).update_all(folder_id: @folder.parent_id)
+        Ckeditor::Asset.folder(f).update_all(folder_id: @folder.parent_id)
       end
       @folder.destroy
     end

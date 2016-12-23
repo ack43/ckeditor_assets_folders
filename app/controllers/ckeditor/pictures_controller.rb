@@ -6,7 +6,8 @@ class Ckeditor::PicturesController < Ckeditor::ApplicationController
     # @folder ||= Ckeditor::Folder.first
     if @folder
       # @pictures = @folder.pictures.find_all(ckeditor_pictures_scope)
-      @pictures = Ckeditor.picture_adapter.find_all(ckeditor_pictures_scope).where(folder_id: @folder.id)
+      # @pictures = Ckeditor.picture_adapter.find_all(ckeditor_pictures_scope).where(folder_id: @folder.id)
+      @pictures = Ckeditor.picture_adapter.find_all(ckeditor_pictures_scope).folder(@folder)
       @folders = @folder.children.sorted unless params[:page]
     else
       @folders = Ckeditor::Folder.roots.sorted

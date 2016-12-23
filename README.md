@@ -23,13 +23,6 @@ Or install it yourself as:
 
 ## Usage
 
-Add this line in app/models/ckeditor/assets.rb
-
-    belongs_to :folder, class_name: 'Ckeditor::Folder', inverse_of: :assets
-    scope :no_folder, -> {
-      where(folder_id: nil)
-    }
-
 That is all! Use ckeditor as usual. Folders will be there.
 
 ## Development

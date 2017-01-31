@@ -38,11 +38,11 @@ $(document).ready ->
 
 
 
-$(document).delegate '.delete-folder', 'ajax:complete', (xhr, status) ->
+$(document).on 'ajax:complete', '.delete-folder', (xhr, status) ->
   document.location.reload()
 
 
-$(document).delegate '.folder-item .gal-inner-holder', 'click', (e) ->
+$(document).on 'click', '.folder-item .gal-inner-holder', (e) ->
   if $(e.currentTarget).find('a.add').length == 0
     e.stopImmediatePropagation()
     document.location = $(e.currentTarget).find('a').attr('href')

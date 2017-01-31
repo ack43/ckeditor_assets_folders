@@ -34,5 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mongoid'
 
   spec.add_dependency 'jquery-dragdrop-rails'
+  spec.add_dependency 'font-awesome-rails'
 
 end

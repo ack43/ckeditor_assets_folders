@@ -16,7 +16,8 @@
 
   <div class="folder-item">
     <div class="add-folder-button gal-upload-holder">
-      <%= text_field 'folder', 'name', value: '', style: 'height: 20px' %>
+      <%- _placeholder = I18n.t(:add_folder_placeholder, scope: [:ckeditor, :placeholders]) %>
+      <%= text_field 'folder', 'name', value: '', style: 'height: 20px', placeholder: _placeholder %>
       <br>
       <%- _title = I18n.t(:add_folder, scope: [:ckeditor, :buttons]) %>
       <%- _url = ckeditor.folders_path(params.merge(folder: {parent_id: (@folder and @folder.id.to_s)})) %>

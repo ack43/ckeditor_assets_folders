@@ -2,4 +2,6 @@ ru:
   ckeditor:
     buttons:
       add_folder: 'Добавить папку'
+    placeholders:
+      add_folder_placeholder: 'Введите имя папки'
     confirm_delete_folder: "Удалить папку??"
